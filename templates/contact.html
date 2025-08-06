@@ -1,0 +1,46 @@
+<!-- File: templates/contact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Cybersecurity Awareness Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="/index.html">CYBER<br>GAMIFIED</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/for_whom.html">For Whom?</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <!-- Login/Signup Buttons -->
+            <div class="nav-buttons">
+                <a href="/login.html" class="login-btn">Login</a>
+                <a href="/signup.html" class="signup-btn">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="static-page-container">
+            <p>We'd love to hear from you!</p>
+            <h2>Send Us a Message</h2>
+            <div class="contact-form-container">
+                <form action="#" method="post" class="contact-form">
+                    <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+                    <input type="email" name="email" class="form-input" placeholder="Your Email" required>
+                    <textarea name="message" class="form-input" rows="5" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

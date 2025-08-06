@@ -1,0 +1,99 @@
+<!-- File: templates/for_whom.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Whom? - Cybersecurity Awareness Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Font Awesome for check icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="/index.html">CYBER<br>GAMIFIED</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/for_whom.html">For Whom?</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <!-- Login/Signup Buttons -->
+            <div class="nav-buttons">
+                <a href="/login.html" class="login-btn">Login</a>
+                <a href="/signup.html" class="signup-btn">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="for-whom-container">
+            <div class="section-title">
+                <h5 class="text-primary">WHO IS THIS FOR?</h5>
+                <h1>Cybersecurity is Everyone's Responsibility</h1>
+            </div>
+            <div class="audience-grid">
+                
+                <!-- Individuals & Families -->
+                <div class="audience-card">
+                    <div class="card-header">
+                        <h4>Individuals & Families</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Cyber Gamified is a fun and easy way to boost awareness. Learn how to protect personal data and teach your loved ones the basics of online safety.
+                        </p>
+                        <div class="feature-item">
+                            <span>Family-friendly cybersecurity tips</span><i class="fas fa-check text-primary"></i>
+                        </div>
+                        <div class="feature-item">
+                            <span>Teaches safe online behavior</span><i class="fas fa-check text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organizations & Teams -->
+                <div class="audience-card middle-card">
+                    <div class="card-header">
+                        <h4>Organizations & Teams</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Cyber Gamified offers an engaging approach to internal training and public awareness that reduces digital risk across teams and communities.
+                        </p>
+                        <div class="feature-item">
+                            <span>Phishing & scam prevention training</span><i class="fas fa-check text-primary"></i>
+                        </div>
+                        <div class="feature-item">
+                            <span>Empower awareness campaigns</span><i class="fas fa-check text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Students & Educators -->
+                <div class="audience-card">
+                    <div class="card-header">
+                        <h4>Students & Educators</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Cyber Gamified brings cybersecurity concepts to life in the classroom, making learning interactive and memorable.
+                        </p>
+                        <div class="feature-item">
+                            <span>Gamified digital literacy lessons</span><i class="fas fa-check text-primary"></i>
+                        </div>
+                        <div class="feature-item">
+                            <span>Fun & educational classroom experience</span><i class="fas fa-check text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,143 +1,99 @@
+<!-- File: templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cybersecurity Awareness Game</title>
-    <link rel="stylesheet" href="static/style.css">
-   </head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 <body>
-
-    <!-- ======================= APP BAR ======================= -->
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
-                <a href="/">
-                    CYBER<br>GAMIFIED
-                </a>
+                <a href="/index.html">CYBER<br>GAMIFIED</a>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <ul>
-                        <li><a href="/index.html">The Game</a></li>
-                        <li><a href="/for_whom.html">For whom?</a></li>
-                        <li><a href="/about.html">About us</a></li>
-                        <li><a href="/contact.html">Contact us</a></li>
-                    </ul>
-
+                    <!-- Note: I removed Home from here as the logo is the home link -->
+                    <li><a href="/for_whom.html">For Whom?</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact Us</a></li>
                 </ul>
             </nav>
+            <!-- Login/Signup Buttons -->
+            <div class="nav-buttons">
+                <a href="/login.html" class="login-btn">Login</a>
+                <a href="/signup.html" class="signup-btn">Sign Up</a>
+            </div>
         </div>
     </header>
 
-    <!-- ======================= CATEGORY SELECTION HUB ======================= -->
-    <div id="category-hub">
-        <div class="page-intro">
-            <h1>Cybersecurity Topics</h1>
-            <p>Select a category to test your knowledge.</p>
-        </div>
-
-        <div class="category-grid">
-            <!-- Card 1 -->
-            <div class="category-card">
-                <div class="card-content">
-                    <h2>Social Engineering</h2>
-                    <p>The art of human manipulation.</p>
+    <main>
+        <div id="category-hub">
+            <div class="page-intro">
+                <h1>Cybersecurity Awareness Games</h1>
+                <p>Select a category to test your knowledge. 
+                    <br>The games are designed to challenge and educate you on crucial cybersecurity concepts.</p>
+            </div>
+            <div class="category-grid">
+                <!-- Cards will be populated here -->
+                <div class="category-card">
+                    <div class="card-content"><h2>Social Engineering</h2><p>The art of human manipulation.</p></div>
+                    <button class="start-category-button" data-category="social-engineering">Start Game</button>
                 </div>
-                <button class="start-category-button" data-category="social-engineering">Start Game</button>
-            </div>
-            <!-- Card 2 -->
-            <div class="category-card">
-                <div class="card-content">
-                    <h2>Phishing</h2>
-                    <p>Identifying fraudulent emails.</p>
+                <div class="category-card">
+                    <div class="card-content"><h2>Phishing</h2><p>Identifying fraudulent emails.</p></div>
+                    <button class="start-category-button" data-category="phishing">Start Game</button>
                 </div>
-                <button class="start-category-button" data-category="phishing">Start Game</button>
-            </div>
-            <!-- Card 3 -->
-            <div class="category-card">
-                 <div class="card-content">
-                    <h2>Vishing</h2>
-                    <p>Voice-based phishing scams.</p>
+                <div class="category-card">
+                    <div class="card-content"><h2>Vishing</h2><p>Voice-based phishing scams.</p></div>
+                    <button class="start-category-button" data-category="vishing">Start Game</button>
                 </div>
-                <button class="start-category-button" data-category="vishing">Start Game</button>
-            </div>
-            <!-- Card 4 -->
-            <div class="category-card">
-                 <div class="card-content">
-                    <h2>Smishing</h2>
-                    <p>Text message-based scams.</p>
+                <div class="category-card">
+                    <div class="card-content"><h2>Smishing</h2><p>Text message-based scams.</p></div>
+                    <button class="start-category-button" data-category="smishing">Start Game</button>
                 </div>
-                <button class="start-category-button" data-category="smishing">Start Game</button>
-            </div>
-            <!-- Card 5 -->
-            <div class="category-card">
-                 <div class="card-content">
-                    <h2>Password Hygiene</h2>
-                    <p>Best practices for passwords.</p>
+                <div class="category-card">
+                    <div class="card-content"><h2>Password Hygiene</h2><p>Best practices for passwords.</p></div>
+                    <button class="start-category-button" data-category="password-hygiene">Start Game</button>
                 </div>
-                <button class="start-category-button" data-category="password-hygiene">Start Game</button>
-            </div>
-            <!-- Card 6 -->
-            <div class="category-card">
-                 <div class="card-content">
-                    <h2>Strong Passwords</h2>
-                    <p>Creating unbreakable codes.</p>
+                <div class="category-card">
+                    <div class="card-content"><h2>Strong Passwords</h2><p>Creating unbreakable codes.</p></div>
+                    <button class="start-category-button" data-category="strong-password">Start Game</button>
                 </div>
-                <button class="start-category-button" data-category="strong-password">Start Game</button>
-            </div>
-            <!-- Card 7 -->
-            <div class="category-card">
-                 <div class="card-content">
-                    <h2>Ransomware</h2>
-                    <p>Protecting your digital files.</p>
+                <div class="category-card">
+                    <div class="card-content"><h2>Ransomware</h2><p>Protecting your digital files.</p></div>
+                    <button class="start-category-button" data-category="ransomware">Start Game</button>
                 </div>
-                <button class="start-category-button" data-category="ransomware">Start Game</button>
-            </div>
-            <!-- Card 8 -->
-            <div class="category-card">
-                 <div class="card-content">
-                    <h2>Spyware</h2>
-                    <p>Keeping your activity private.</p>
+                <div class="category-card">
+                    <div class="card-content"><h2>Spyware</h2><p>Keeping your activity private.</p></div>
+                    <button class="start-category-button" data-category="spyware">Start Game</button>
                 </div>
-                <button class="start-category-button" data-category="spyware">Start Game</button>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- ======================= GAME CONTENT (Takes over screen) ======================= -->
-    <div class="container hidden" id="game-container">
-        <button id="back-button">&larr; Back to Categories</button>
-        <div id="game-screen">
-            <div id="header">
-                <div class="score-container">
-                    <span>Score: </span><span id="score">0</span>
-                </div>
-                <div id="question-counter"></div>
-            </div>
-            <div id="question-container">
-                <h2 id="question-text"></h2>
-            </div>
-            <div id="answer-buttons" class="btn-grid">
-                <!-- Buttons will be generated by JavaScript -->
-            </div>
-            <div id="feedback-container">
-                <p id="feedback-text"></p>
-            </div>
-            <div class="controls">
-                <button id="next-button" class="hidden">Next Question</button>
             </div>
         </div>
 
-        <div id="end-screen" class="hidden">
-            <h2>Category Complete!</h2>
-            <p>Your Final Score: <span id="final-score"></span></p>
-            <p id="end-message"></p>
-            <button id="restart-button">Play Again</button>
+        <div class="container hidden" id="game-container">
+            <button id="back-button">&larr; Categories</button>
+            <div id="game-screen">
+                <div id="header">
+                    <div class="score-container"><span>Score: </span><span id="score">0</span></div>
+                    <div id="question-counter"></div>
+                </div>
+                <div id="question-container"><h2 id="question-text"></h2></div>
+                <div id="answer-buttons" class="btn-grid"></div>
+                <div id="feedback-container"><p id="feedback-text"></p></div>
+                <div class="controls"><button id="next-button" class="hidden">Next Question</button></div>
+            </div>
+            <div id="end-screen" class="hidden">
+                <h2>Category Complete!</h2>
+                <p>Your Final Score: <span id="final-score"></span></p>
+                <p id="end-message"></p>
+                <button id="restart-button">Play Again</button>
+            </div>
         </div>
-    </div>
+    </main>
 
-    <script src="static/script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

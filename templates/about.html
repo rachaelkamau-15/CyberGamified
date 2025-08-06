@@ -1,0 +1,65 @@
+<!-- File: templates/about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Cybersecurity Awareness Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="/index.html">CYBER<br>GAMIFIED</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/for_whom.html">For Whom?</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+            <!-- Login/Signup Buttons -->
+            <div class="nav-buttons">
+                <a href="/login.html" class="login-btn">Login</a>
+                <a href="/signup.html" class="signup-btn">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <div class="about-hero">
+            <div class="hero-content">
+                <h1>About Us</h1>
+                <p>Welcome to Cyber Gamified, your interactive platform for mastering cybersecurity awareness. We believe that knowledge is the best defense against cyber threats, and what better way to learn than by playing a game?</p>
+            </div>
+        </div>
+
+        <!-- Cards Section -->
+        <div class="about-cards-container">
+            <div class="about-grid">
+                <!-- Mission Card -->
+                <div class="about-card">
+                    <div class="card-icon-wrapper"><span class="card-icon icon-mission"></span></div>
+                    <h2>Our Mission</h2>
+                    <p>To make learning about digital safety engaging, accessible, and effective for everyone in a world where digital threats are constantly evolving.</p>
+                </div>
+                <!-- Approach Card -->
+                <div class="about-card">
+                    <div class="card-icon-wrapper"><span class="card-icon icon-approach"></span></div>
+                    <h2>Our Approach</h2>
+                    <p>We gamify the learning process with quizzes on essential topics. From phishing to passwords—in a fun and competitive format to replace dry, outdated training.</p>
+                </div>
+                <!-- Team Card -->
+                <div class="about-card">
+                    <div class="card-icon-wrapper"><span class="card-icon icon-team"></span></div>
+                    <h2>Our Team</h2>
+                    <p>Comprised of cybersecurity professionals and developers dedicated to crafting a high-quality experience with practical, real-world knowledge.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

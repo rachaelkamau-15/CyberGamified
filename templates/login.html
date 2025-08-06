@@ -1,0 +1,27 @@
+<!-- File: templates/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Cyber Gamified</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="auth-body">
+    <div class="auth-container">
+        <div class="auth-logo">
+            <a href="/index.html">CYBER<br>GAMIFIED</a>
+        </div>
+        <h1 class="auth-title">Welcome Back!</h1>
+        <p class="auth-subtitle">Log in to continue your game.</p>
+        <form action="/login" method="post" class="auth-form">
+            <input type="email" name="email" class="auth-input" placeholder="Email Address" required>
+            <input type="password" name="password" class="auth-input" placeholder="Password" required>
+            <button type="submit" class="auth-button">Log In</button>
+        </form>
+        <div class="auth-footer">
+            <p>Don't have an account? <a href="/signup.html">Sign up</a></p>
+        </div>
+    </div>
+</body>
+</html>
