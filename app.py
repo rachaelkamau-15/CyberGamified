@@ -4,8 +4,12 @@ import sqlite3
 
 app = Flask(__name__)
 
-# This route serves the main page (index.html)
+# This route now serves the new landing page
 @app.route('/')
+def landing():
+    return render_template('landing.html')
+
+# This is the "Home" page with the game categories
 @app.route('/index.html')
 def index():
     return render_template('index.html')
@@ -39,15 +43,12 @@ def signup():
 @app.route('/questions/<category>')
 def get_questions(category):
     conn = sqlite3.connect('questions.db')
-    conn.row_factory = sqlite3.Row  # This lets us access columns by name
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    
-    # Select all columns from the questions table where the category matches the one in the URL
     cursor.execute("SELECT * FROM questions WHERE category = ?", (category,))
     rows = cursor.fetchall()
     conn.close()
 
-    # Format the data into a list of dictionaries that the JavaScript can easily use
     questions = []
     for row in rows:
         questions.append({
@@ -60,7 +61,6 @@ def get_questions(category):
             ],
             'feedback': row['feedback']
         })
-        
     return jsonify(questions)
 
 if __name__ == '__main__':
