@@ -1,8 +1,35 @@
 # File: app.py
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request, redirect, url_for, flash
 import sqlite3
+import hashlib
 
 app = Flask(__name__)
+app.secret_key = 'your-secret-key-here'  # Change this to a random secret key
+
+# Initialize users database
+def init_users_db():
+    conn = sqlite3.connect('questions.db')
+    c = conn.cursor()
+    
+    c.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        email TEXT UNIQUE NOT NULL,
+        password_hash TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+    ''')
+    
+    conn.commit()
+    conn.close()
+
+# Call this function when the app starts
+init_users_db()
+
+# Helper function to hash passwords
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
 
 # This route serves the main page (index.html)
 @app.route('/')
@@ -25,15 +52,58 @@ def about():
 def contact():
     return render_template('contact.html')
 
-# Route for the Login page
+# Route for the Login page (GET)
 @app.route('/login.html')
-def login():
+def login_page():
     return render_template('login.html')
 
-# Route for the Signup page
+# Route for handling login form submission (POST)
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+    password_hash = hash_password(password)
+    
+    conn = sqlite3.connect('questions.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE username = ? AND password_hash = ?", (username, password_hash))
+    user = cursor.fetchone()
+    conn.close()
+    
+    if user:
+        flash('Login successful!', 'success')
+        return redirect(url_for('index'))
+    else:
+        flash('Invalid username or password', 'error')
+        return redirect(url_for('login_page'))
+
+# Route for the Signup page (GET)
 @app.route('/signup.html')
-def signup():
+def signup_page():
     return render_template('signup.html')
+
+# Route for handling signup form submission (POST)
+@app.route('/signup', methods=['POST'])
+def signup():
+    username = request.form['username']
+    email = request.form['email']
+    password = request.form['password']
+    password_hash = hash_password(password)
+    
+    conn = sqlite3.connect('questions.db')
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)", 
+                      (username, email, password_hash))
+        conn.commit()
+        flash('Account created successfully! You can now log in.', 'success')
+        return redirect(url_for('login_page'))
+    except sqlite3.IntegrityError:
+        flash('Username or email already exists', 'error')
+        return redirect(url_for('signup_page'))
+    finally:
+        conn.close()
 
 # This route handles fetching questions for a specific category
 @app.route('/questions/<category>')
