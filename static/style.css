@@ -16,7 +16,7 @@ main {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* ======================= APP BAR / HEADER STYLES ======================= */
@@ -222,67 +222,8 @@ main {
 .correct-feedback { color: #22c55e; }
 .wrong-feedback { color: #ef4444; }
 
-/* ======================= STATIC PAGE STYLES (Contact, etc.) ======================= */
-.static-page-container {
-    background-color: #1e293b;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    color: #cbd5e1;
-    line-height: 1.7;
-    max-width: 900px;
-    margin: 20px auto;
-}
-.static-page-container h1 { color: #38bdf8; border-bottom: 2px solid #38bdf8; padding-bottom: 10px; margin-bottom: 20px; }
-.static-page-container h2 { color: #f8fafc; margin-top: 25px; margin-bottom: 15px; }
-.static-page-container p { font-size: 1.1rem; margin-bottom: 15px; }
-.static-page-container strong { color: #f8fafc; }
+/* ======================= AUTHENTICATION PAGE STYLES (Most Compact Version) ======================= */
 
-/* ======================= CONTACT FORM STYLES ======================= */
-.form-divider { border: none; height: 1px; background-color: #334155; margin: 40px 0; }
-.contact-form { display: flex; flex-direction: column; gap: 20px; }
-.form-input { background-color: #0f172a; color: #f8fafc; border: 1px solid #334155; border-radius: 8px; padding: 15px; font-size: 1rem; font-family: 'Inter', sans-serif; transition: border-color 0.3s, box-shadow 0.3s; }
-.form-input::placeholder { color: #94a3b8; }
-.form-input:focus { outline: none; border-color: #38bdf8; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2); }
-textarea.form-input { resize: vertical; min-height: 120px; }
-.submit-btn { background-color: transparent; color: #065ce8; border: 2px solid #065ce8; border-radius: 8px; padding: 15px 30px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background-color 0.3s, color 0.3s; text-transform: uppercase; letter-spacing: 1px; align-self: center; margin-top: 10px; }
-.submit-btn:hover { background-color: #065ce8; color: #f8fafc; }
-
-/* ======================= FOR WHOM PAGE STYLES ======================= */
-.for-whom-container, .about-cards-container { max-width: 1200px; margin: 20px auto; padding: 20px; }
-.section-title { text-align: center; margin-bottom: 50px; }
-.section-title h1 { font-size: 2.5rem; color: #f8fafc; margin-top: 5px; }
-.section-title .text-primary, .text-primary { color: #065ce8; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; }
-.audience-grid, .about-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
-@media (min-width: 992px) { .audience-grid, .about-grid { grid-template-columns: repeat(3, 1fr); } }
-.audience-card { background-color: #1e293b; border-radius: 15px; text-align: left; display: flex; flex-direction: column; height: 100%; transition: transform 0.3s, box-shadow 0.3s; }
-.audience-card:hover { transform: translateY(-5px); }
-.middle-card { background-color: #0f172a; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); transform: scale(1.05); z-index: 2; }
-.middle-card:hover { transform: scale(1.08) translateY(-5px); }
-@media (max-width: 991px) { .middle-card { transform: none; } }
-.card-header { border-bottom: 2px solid #334155; padding: 25px 30px; margin-bottom: 20px; }
-.card-header h4 { color: #065ce8; margin: 0; font-size: 1.4rem; }
-.card-body { padding: 0 30px 30px; }
-.card-description { font-size: 1.05rem; line-height: 1.6; margin-bottom: 25px; min-height: 140px; }
-.feature-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 1.1rem; }
-.feature-item i { font-size: 1.2rem; }
-
-/* ======================= ABOUT US PAGE STYLES ======================= */
-.about-hero { background-color: #0f172a; padding: 60px 30px; text-align: center; margin: -35px -15px 40px -15px; }
-.hero-content h1 { font-size: 3.5rem; font-weight: bold; color: #f8fafc; margin-bottom: 20px; }
-.hero-content p { font-size: 1.25rem; color: #cbd5e1; max-width: 800px; margin: 0 auto; line-height: 1.7; }
-.about-card { background-color: #1e293b; border-radius: 15px; padding: 40px 30px; text-align: center; box-shadow: 0 8px 16px rgba(0,0,0,0.2); transition: transform 0.3s, box-shadow 0.3s; }
-.about-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.3); }
-.card-icon-wrapper { margin-bottom: 20px; }
-.card-icon { display: inline-block; width: 20px; height: 20px; border-radius: 50%; }
-.icon-mission { background-color: #a855f7; }
-.icon-approach { background-color: #22c55e; }
-.icon-team { background-color: #f97316; }
-.about-card h2 { color: #065ce8; font-size: 1.5rem; margin-bottom: 15px; }
-.about-card p { color: #94a3b8; font-size: 1rem; line-height: 1.6; }
-.final-message { text-align: center; font-size: 1.2rem; color: #cbd5e1; margin-top: 50px; }
-
-/* ======================= AUTHENTICATION PAGE STYLES ======================= */
 .auth-body {
     background-color: #eef2f9;
     display: flex;
@@ -291,26 +232,746 @@ textarea.form-input { resize: vertical; min-height: 120px; }
     min-height: 100vh;
     padding: 20px;
     font-family: 'Inter', sans-serif;
-    padding-top: 0; /* Override default body padding */
+    padding-top: 0;
 }
+
 .auth-container {
     background-color: #ffffff;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Reduced padding */
+    border-radius: 12px; /* Slightly smaller radius */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 450px;
+    max-width: 340px; /* <-- FURTHER REDUCED MAX-WIDTH */
     text-align: center;
 }
-.auth-logo { margin-bottom: 30px; }
-.auth-logo a { font-size: 24px; font-weight: bold; color: #0f172a; text-decoration: none; letter-spacing: 1px; line-height: 1.2; }
-.auth-title { color: #0f172a; font-size: 1.8rem; margin-bottom: 5px; }
-.auth-subtitle { color: #64748b; margin-bottom: 30px; }
-.auth-form { display: flex; flex-direction: column; gap: 15px; }
-.auth-input { width: 100%; padding: 15px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s, box-shadow 0.3s; color: #0f172a;}
+
+.auth-logo { margin-bottom: 20px; }
+.auth-logo a { font-size: 20px; font-weight: bold; color: #0f172a; text-decoration: none; letter-spacing: 1px; line-height: 1.2; }
+.auth-title { color: #0f172a; font-size: 1.6rem; margin-bottom: 5px; }
+.auth-subtitle { color: #64748b; margin-bottom: 25px; font-size: 0.95rem; }
+
+.auth-form { display: flex; flex-direction: column; gap: 14px; }
+
+.auth-input { 
+    width: 100%; 
+    padding: 13px; /* Reduced padding */
+    border: 1px solid #cbd5e1; 
+    border-radius: 8px; 
+    font-size: 0.95rem; /* Reduced font size */
+    box-sizing: border-box; 
+    transition: border-color 0.3s, box-shadow 0.3s; 
+    color: #0f172a;
+}
 .auth-input:focus { outline: none; border-color: #065ce8; box-shadow: 0 0 0 3px rgba(6, 92, 232, 0.2); }
 .auth-input::placeholder { color: #94a3b8; }
-.auth-button { background-color: #065ce8; color: #ffffff; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background-color 0.3s; margin-top: 10px; }
+
+.auth-button { background-color: #065ce8; color: #ffffff; border: none; padding: 13px; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background-color 0.3s; margin-top: 8px; }
 .auth-button:hover { background-color: #0548b3; }
-.auth-footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; color: #64748b; }
+
+.auth-footer { margin-top: 25px; padding-top: 15px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.9rem; }
 .auth-footer a { color: #065ce8; font-weight: bold; text-decoration: none; }
+
+/* --- Password Related Styles (Adapted for Compact Form) --- */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper .auth-input {
+    padding-right: 55px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 0.8rem; /* Smaller font */
+    user-select: none;
+}
+
+.password-requirements {
+    font-size: 0.75rem;
+    color: #64748b;
+    text-align: left;
+    margin: -8px auto 8px 5px;
+    line-height: 1.3;
+}
+
+.auth-error {
+    background-color: #ffebee;
+    border: 1px solid #e57373;
+    color: #c62828;
+    padding: 10px 15px; /* Reduced padding */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 0.85rem; /* Smaller font */
+}
+/* === PROFILE DROPDOWN STYLES === */
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+}
+
+/* The main container for the dropdown */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* The button/icon that triggers the dropdown */
+.profile-btn {
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-btn img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-btn:focus, .profile-btn:hover {
+    border: 2px solid #ddd; /* Highlight on hover/focus */
+}
+
+
+/* The dropdown menu itself (hidden by default) */
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    right: 0;
+    top: 55px; /* Position below the button */
+    background-color: white;
+    min-width: 240px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    z-index: 100;
+    border: 1px solid #eee;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Add the 'show' class with JavaScript to display the dropdown */
+.dropdown-content.show {
+    display: block;
+}
+
+/* Header section inside the dropdown */
+.dropdown-header {
+    padding: 10px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 10px;
+}
+
+.dropdown-header h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Styles for links inside the dropdown */
+.dropdown-content a {
+    color: #333;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: flex; /* Use flexbox for alignment */
+    align-items: center;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.dropdown-content a i {
+    margin-right: 15px; /* Space between icon and text */
+    width: 16px; /* Fixed width for icons */
+    text-align: center;
+    color: #555;
+}
+
+
+.dropdown-content a:hover {
+    background-color: #f5f5f5;
+}
+
+/* Styling for the section titles (Account, Setting) */
+.dropdown-section {
+    margin-bottom: 10px;
+}
+
+.section-title {
+    padding: 0 20px 8px 20px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #999;
+    display: block;
+}
+/* =================================================================== */
+/*                     NEW STYLES FOR STATIC PAGES                     */
+/* =================================================================== */
+
+
+/* ======================= FOR WHOM? PAGE STYLES ======================= */
+.for-whom-container {
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h1 {
+    font-size: 2.2rem;
+    margin-top: 5px;
+}
+
+.section-title h5.text-primary {
+    color: #065ce8;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.audience-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+@media (min-width: 992px) {
+    .audience-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.audience-card {
+    background: #1e293b;
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s;
+}
+
+.audience-card:hover {
+    transform: translateY(-8px);
+}
+
+.audience-card .card-header h4 {
+    font-size: 1.5rem;
+    color: #065ce8;
+    margin: 0 0 15px 0;
+}
+
+.audience-card .card-description {
+    color: #cbd5e1;
+    line-height: 1.6;
+    flex-grow: 1; /* Pushes features to the bottom */
+}
+
+.audience-card .feature-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #334155;
+    font-weight: 500;
+}
+
+.audience-card .feature-item i.text-primary {
+    color: #22c55e; /* Green checkmark */
+    font-size: 1.2rem;
+}
+
+.audience-card.middle-card {
+    transform: scale(1.05); /* Makes the middle card slightly larger */
+    background-color: #065ce8;
+    box-shadow: 0 10px 30px rgba(6, 92, 232, 0.3);
+}
+
+.audience-card.middle-card:hover {
+    transform: scale(1.08) translateY(-8px);
+}
+
+.audience-card.middle-card .card-header h4,
+.audience-card.middle-card .card-description,
+.audience-card.middle-card .feature-item {
+    color: #f8fafc;
+}
+
+.audience-card.middle-card .feature-item i.text-primary {
+    color: #f8fafc;
+}
+
+/* ======================= ABOUT US PAGE STYLES ======================= */
+.about-hero {
+    padding: 60px 20px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: #1e293b;
+    margin-bottom: 50px;
+}
+
+.about-hero .hero-content h1 {
+    font-size: 2.5rem;
+    color: #065ce8;
+}
+
+.about-hero .hero-content p {
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    max-width: 700px;
+    margin: 10px auto 0 auto;
+}
+
+.about-cards-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+@media (min-width: 768px) {
+    .about-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.about-card {
+    background-color: #1e293b;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.about-card h2 {
+    color: #065ce8;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.about-card p {
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+.card-icon-wrapper {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    background-color: #065ce8;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-icon {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-color: #f8fafc; /* Icon color */
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+/* Icons using CSS Masking */
+.icon-mission {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h80c8.8 0 16-7.2 16-16s-7.2-16-16-16h-80c-8.8 0-16 7.2-16 16s7.2 16 16 16zm0-96h80c8.8 0 16-7.2 16-16s-7.2-16-16-16h-80c-8.8 0-16 7.2-16 16s7.2 16 16 16zm-32-32c0-26.5 21.5-48 48-48h48c26.5 0 48 21.5 48 48v96h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H320 160c-8.8 0-16-7.2-16-16s7.2-16 16-16h32V208z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h80c8.8 0 16-7.2 16-16s-7.2-16-16-16h-80c-8.8 0-16 7.2-16 16s7.2 16 16 16zm0-96h80c8.8 0 16-7.2 16-16s-7.2-16-16-16h-80c-8.8 0-16 7.2-16 16s7.2 16 16 16zm-32-32c0-26.5 21.5-48 48-48h48c26.5 0 48 21.5 48 48v96h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H320 160c-8.8 0-16-7.2-16-16s7.2-16 16-16h32V208z'/%3E%3C/svg%3E");
+}
+
+.icon-approach {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M320 64C320 28.7 291.3 0 256 0S192 28.7 192 64V96H48c-26.5 0-48 21.5-48 48V288c0 26.5 21.5 48 48 48H192v32c0 35.3 28.7 64 64 64s64-28.7 64-64V336H592c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48H448V64c0-35.3-28.7-64-64-64s-64 28.7-64 64zm64 96H256V96h128v64zM144 240a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm128-48a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zm112 48a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm128-48a32 32 0 1 1 -64 0 32 32 0 1 1 64 0z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M320 64C320 28.7 291.3 0 256 0S192 28.7 192 64V96H48c-26.5 0-48 21.5-48 48V288c0 26.5 21.5 48 48 48H192v32c0 35.3 28.7 64 64 64s64-28.7 64-64V336H592c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48H448V64c0-35.3-28.7-64-64-64s-64 28.7-64 64zm64 96H256V96h128v64zM144 240a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm128-48a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zm112 48a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm128-48a32 32 0 1 1 -64 0 32 32 0 1 1 64 0z'/%3E%3C/svg%3E");
+}
+
+.icon-team {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H426.7c-11.8 0-21.3-9.6-21.3-21.3zM256 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 437.5 165.5 400 213.3 400h186.7c47.8 0 85.3 37.5 85.3 85.3c0 11.8-9.6 21.3-21.3 21.3H149.3c-11.8 0-21.3-9.6-21.3-21.3z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w.org/2000/svg' viewBox='0 0 640 512'%3E%3Cpath d='M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H426.7c-11.8 0-21.3-9.6-21.3-21.3zM256 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 437.5 165.5 400 213.3 400h186.7c47.8 0 85.3 37.5 85.3 85.3c0 11.8-9.6 21.3-21.3 21.3H149.3c-11.8 0-21.3-9.6-21.3-21.3z'/%3E%3C/svg%3E");
+}
+
+/* ======================= CONTACT US PAGE STYLES ======================= */
+.static-page-container {
+    max-width: 700px;
+    margin: 40px auto;
+    background-color: #1e293b;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.static-page-container h2 {
+    color: #065ce8;
+    margin-top: 10px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background-color: #0f172a;
+    color: #f8fafc;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #065ce8;
+    box-shadow: 0 0 0 3px rgba(6, 92, 232, 0.3);
+}
+
+.form-input::placeholder {
+    color: #94a3b8;
+}
+
+.submit-btn {
+    background-color: #065ce8;
+    color: #f8fafc;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #0548b3;
+}
+/* ======================= PROFILE DROPDOWN MENU STYLES ======================= */
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* This is the clickable button containing the avatar and name */
+.profile-btn {
+    background-color: transparent;
+    border: 2px solid transparent; /* Add a border for a hover/focus effect */
+    border-radius: 50px; /* Pill shape */
+    cursor: pointer;
+    padding: 4px; /* Small padding around the content */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between avatar and name */
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.profile-btn:hover, .profile-btn:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    outline: none;
+}
+
+.profile-btn .profile-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+}
+
+.profile-name-header {
+    color: #f8fafc;
+    font-weight: 600;
+    font-size: 1rem;
+    padding-right: 10px; /* Add some padding on the right */
+}
+
+/* The dropdown container (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 60px; /* Position it below the header */
+    background-color: #ffffff;
+    color: #0f172a;
+    min-width: 260px; /* Slightly wider */
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    z-index: 1001;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    padding: 8px 0;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+/* NO LONGER NEEDED: The .dropdown-header style can be deleted */
+
+.dropdown-section {
+    padding: 10px 0; /* Add padding to the top/bottom of the whole section */
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.dropdown-section:last-of-type {
+    border-bottom: none; /* No border for the last section */
+}
+
+.section-title {
+    padding: 0 20px 8px 20px; /* Reduced bottom padding */
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dropdown-content a {
+    color: #334155;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-content a i {
+    margin-right: 18px; /* Slightly more space for icons */
+    width: 20px;
+    text-align: center;
+    color: #64748b;
+    transition: color 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f5f9;
+    color: #065ce8;
+}
+
+.dropdown-content a:hover i {
+    color: #065ce8;
+}
+
+/* Specific red color for important links like "Update Profile" and "Logout" */
+.dropdown-content a.text-danger,
+.dropdown-content a.text-danger i {
+    color: #ef4444; /* Red color */
+}
+
+.dropdown-content a.text-danger:hover {
+    color: #ffffff;
+    background-color: #ef4444;
+}
+
+.dropdown-content a.text-danger:hover i {
+    color: #ffffff;
+}
+/* ======================= MY DASHBOARD PAGE STYLES ======================= */
+.dashboard-container {
+    padding: 20px;
+}
+.dashboard-container h1 {
+    font-size: 2.5rem;
+    color: #f8fafc;
+    margin-bottom: 5px;
+}
+.dashboard-container .subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.summary-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+@media (min-width: 576px) {
+    .summary-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.stat-card {
+    background-color: #1e293b;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+}
+.stat-card h3 {
+    font-size: 2.2rem;
+    color: #065ce8;
+    margin: 0 0 5px 0;
+}
+.stat-card p {
+    margin: 0;
+    font-size: 1rem;
+    color: #cbd5e1;
+    font-weight: 500;
+}
+
+.dashboard-container h2 {
+    color: #f8fafc;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+.dashboard-container h2.mt-large {
+    margin-top: 50px;
+}
+
+.progress-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.progress-card {
+    background-color: #1e293b;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.progress-card h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    text-transform: capitalize;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 30px;
+    background-color: #0f172a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #065ce8, #38bdf8);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding-right: 10px;
+    box-sizing: border-box;
+    transition: width 0.5s ease-in-out;
+}
+.progress-bar span {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.quiz-action-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+.quiz-action-btn.play-again {
+    background-color: #334155;
+    color: #f8fafc;
+}
+.quiz-action-btn.play-again:hover {
+    background-color: #475569;
+}
+.quiz-action-btn.start-now {
+    background-color: #065ce8;
+    color: #f8fafc;
+}
+.quiz-action-btn.start-now:hover {
+    background-color: #0548b3;
+}
+
+.progress-card.uncompleted {
+    border-left: 4px solid #f97316;
+}
+.progress-card.uncompleted .no-score {
+    color: #94a3b8;
+    font-style: italic;
+    margin: auto 0;
+}
+/* ======================= END SCREEN BUTTON STYLES ======================= */
+.end-screen-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between the buttons */
+    margin-top: 30px;
+}
+/* ======================= END SCREEN BUTTON STYLES ======================= */
+.end-screen-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between the buttons */
+    margin-top: 30px;
+}
+/* ======================= STYLES FOR PUBLIC INDEX PAGE ======================= */
+
+.login-prompt {
+    margin-top: 20px;
+    font-weight: 500;
+    color: #38bdf8; /* A nice highlight color */
+}
+
+/* This styles the new <a> tags to look like disabled buttons */
+.start-category-button-disabled {
+    display: inline-block; /* Allows padding and other box properties */
+    background-color: #334155; /* A darker, disabled color */
+    color: #94a3b8;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer; /* Still shows a pointer to indicate it's clickable */
+    margin-top: 20px;
+    transition: background-color 0.3s;
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding doesn't break layout */
+    text-decoration: none;
+    text-align: center;
+}
+
+.start-category-button-disabled:hover {
+    background-color: #475569; /* Slightly lighter on hover */
+    color: #f8fafc;
+    text-decoration: none;
+}
