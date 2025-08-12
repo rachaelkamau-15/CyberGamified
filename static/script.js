@@ -1,182 +1,213 @@
-// File: static/script.js (Final Working Version)
-document.addEventListener('DOMContentLoaded', () => {
-    // --- Element Selection ---
-    const categoryHub = document.getElementById('category-hub');
-    const startButtons = document.querySelectorAll('.start-category-button');
-    const gameContainer = document.getElementById('game-container');
-    const gameScreen = document.getElementById('game-screen');
-    const endScreen = document.getElementById('end-screen');
-    const backButton = document.getElementById('back-button');
-    const restartButton = document.getElementById('restart-button');
-    const nextButton = document.getElementById('next-button');
-    const questionText = document.getElementById('question-text');
-    const questionCounter = document.getElementById('question-counter');
-    const answerButtons = document.getElementById('answer-buttons');
-    const feedbackText = document.getElementById('feedback-text');
-    const scoreElement = document.getElementById('score');
-    const finalScoreElement = document.getElementById('final-score');
-    const endMessageElement = document.getElementById('end-message');
+// =========================================================================
+//                             ELEMENT SELECTORS
+// =========================================================================
+const categoryHub = document.getElementById('category-hub');
+const gameContainer = document.getElementById('game-container');
+const endScreen = document.getElementById('end-screen');
+const backButton = document.getElementById('back-button');
+const startButtons = document.querySelectorAll('.start-category-button');
 
-    // --- Game State & Loop Prevention ---
-    let currentQuestions = [];
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let currentCategory = ''; // This variable is crucial for the 'Play Again' button
-    let isGameActive = false; // Prevents accidental double-clicks or loops
+const questionTextElement = document.getElementById('question-text');
+const answerButtonsElement = document.getElementById('answer-buttons');
+const feedbackTextElement = document.getElementById('feedback-text');
+const nextButton = document.getElementById('next-button');
 
-    // --- Event Listeners ---
-    // When a category is chosen, save the category name and start the game
-    startButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            currentCategory = button.dataset.category;
-            startGame(currentCategory);
-        });
+// These buttons are no longer used but the references are kept for stability
+const playAgainButton = document.getElementById('play-again-button');
+const backToCategoriesButton = document.getElementById('back-to-categories-button');
+
+const scoreElement = document.getElementById('score');
+const questionCounterElement = document.getElementById('question-counter');
+const finalScoreElement = document.getElementById('final-score');
+const endMessageElement = document.getElementById('end-message');
+
+
+// =========================================================================
+//                             GAME STATE
+// =========================================================================
+let currentCategory = '';
+let questions = [];
+let currentQuestionIndex = 0;
+let score = 0;
+
+
+// =========================================================================
+//                             EVENT LISTENERS
+// =========================================================================
+startButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const category = button.dataset.category;
+        startGame(category);
+    });
+});
+
+if (nextButton) {
+    nextButton.addEventListener('click', () => {
+        currentQuestionIndex++;
+        setNextQuestion();
+    });
+}
+
+// These event listeners are no longer necessary but cause no harm
+if (playAgainButton) {
+    playAgainButton.addEventListener('click', () => {
+        startGame(currentCategory);
+    });
+}
+
+if (backToCategoriesButton) {
+    backToCategoriesButton.addEventListener('click', showCategoryHub);
+}
+
+
+if (backButton) {
+    backButton.addEventListener('click', showCategoryHub);
+}
+
+
+// =========================================================================
+//                             CORE GAME LOGIC
+// =========================================================================
+async function startGame(category) {
+    currentCategory = category;
+    
+    const questionsFetched = await fetchQuestions(category);
+    if (!questionsFetched) {
+        return; 
+    }
+
+    currentQuestionIndex = 0;
+    score = 0;
+    scoreElement.innerText = score;
+    
+    categoryHub.classList.add('hidden');
+    endScreen.classList.add('hidden');
+    gameContainer.classList.remove('hidden');
+
+    setNextQuestion();
+}
+
+async function fetchQuestions(category) {
+    try {
+        const response = await fetch(`/questions/${category}`);
+        if (response.status === 401) {
+            window.location.href = `/login.html?next=${window.location.pathname}`;
+            return false;
+        }
+        if (!response.ok) {
+            alert('Could not start the game. Please try again later.');
+            return false;
+        }
+        questions = await response.json();
+        return true;
+    } catch (error) {
+        console.error('An error occurred while fetching questions:', error);
+        return false;
+    }
+}
+
+function setNextQuestion() {
+    resetState();
+    if (currentQuestionIndex < questions.length) {
+        showQuestion(questions[currentQuestionIndex]);
+        updateQuestionCounter();
+    } else {
+        showEndScreen();
+    }
+}
+
+function showQuestion(questionData) {
+    questionTextElement.innerText = questionData.question;
+    questionData.answers.forEach(answer => {
+        const button = document.createElement('button');
+        button.innerText = answer.text;
+        button.classList.add('btn');
+        if (answer.correct) {
+            button.dataset.correct = true;
+        }
+        button.addEventListener('click', selectAnswer);
+        answerButtonsElement.appendChild(button);
+    });
+}
+
+function selectAnswer(e) {
+    const selectedButton = e.target;
+    const isCorrect = selectedButton.dataset.correct === 'true';
+
+    if (isCorrect) {
+        score++;
+        scoreElement.innerText = score;
+        feedbackTextElement.innerText = 'Correct!';
+        feedbackTextElement.className = 'correct-feedback';
+    } else {
+        feedbackTextElement.innerText = questions[currentQuestionIndex].feedback;
+        feedbackTextElement.className = 'wrong-feedback';
+    }
+
+    Array.from(answerButtonsElement.children).forEach(button => {
+        setStatusClass(button, button.dataset.correct);
+        button.disabled = true;
     });
 
-    // Go back to the main menu
-    if (backButton) {
-        backButton.addEventListener('click', () => {
-            showScreen('hub');
-        });
-    }
+    nextButton.classList.remove('hidden');
+}
 
-    // Go to the next question
-    if (nextButton) {
-        nextButton.addEventListener('click', () => {
-            currentQuestionIndex++;
-            setNextQuestion();
-        });
-    }
+function setStatusClass(element, correct) {
+    clearStatusClass(element);
+    if (correct) { element.classList.add('correct'); } 
+    else { element.classList.add('wrong'); }
+}
 
-    // --- THIS IS THE "PLAY AGAIN" LOGIC ---
-    if (restartButton) {
-        restartButton.addEventListener('click', () => {
-            // Check that we remember which category was played
-            if (currentCategory) {
-                // Call the startGame function again with the *same category*
-                startGame(currentCategory);
-            }
-        });
+function clearStatusClass(element) {
+    element.classList.remove('correct', 'wrong');
+}
+
+function resetState() {
+    nextButton.classList.add('hidden');
+    feedbackTextElement.innerText = '';
+    feedbackTextElement.className = '';
+    while (answerButtonsElement.firstChild) {
+        answerButtonsElement.removeChild(answerButtonsElement.firstChild);
     }
+}
+
+function updateQuestionCounter() {
+    questionCounterElement.innerText = `Question ${currentQuestionIndex + 1} / ${questions.length}`;
+}
+
+// =========================================================================
+//                   UPDATED END SCREEN & SCORE SAVING LOGIC
+// =========================================================================
+async function showEndScreen() {
+    const finalScorePercent = Math.round((score / questions.length) * 100);
     
-    // --- UI Control Function ---
-    // Manages which parts of the application are visible
-    function showScreen(screenName) {
-        categoryHub.classList.add('hidden');
-        gameContainer.classList.add('hidden');
-        
-        if (screenName === 'hub') {
-            categoryHub.classList.remove('hidden');
-        } else if (screenName === 'game') {
-            gameContainer.classList.remove('hidden');
-            gameScreen.classList.remove('hidden');
-            endScreen.classList.add('hidden');
-        } else if (screenName === 'end') {
-            gameContainer.classList.remove('hidden');
-            gameScreen.classList.add('hidden');
-            endScreen.classList.remove('hidden');
-        }
-    }
+    // First, save the score and wait for it to finish
+    await saveScore(currentCategory, finalScorePercent);
     
-    // --- Core Game Functions ---
-    // Resets the state and starts a new quiz for the given category
-    async function startGame(category) {
-        if (isGameActive) return; 
-        isGameActive = true;
+    // Then, automatically redirect to the dashboard
+    window.location.href = '/my-dashboard';
+}
 
-        // Reset score and question counter for the new game
-        score = 0;
-        currentQuestionIndex = 0;
-        scoreElement.innerText = score;
-        
-        showScreen('game'); // Show the game screen
-
-        try {
-            const response = await fetch(`/questions/${category}`);
-            if (!response.ok) throw new Error(`Server returned status: ${response.status}`);
-            currentQuestions = await response.json();
-            setNextQuestion(); // Load the first question
-        } catch (error) {
-            console.error('Failed to load questions:', error);
-            alert('Could not load game questions. See console for details.');
-            isGameActive = false;
-        }
-    }
-
-    // Loads the next question or ends the game
-    function setNextQuestion() {
-        if (currentQuestionIndex < currentQuestions.length) {
-            resetState();
-            showQuestion(currentQuestions[currentQuestionIndex]);
-            questionCounter.innerText = `Question ${currentQuestionIndex + 1} / ${currentQuestions.length}`;
+async function saveScore(category, score) {
+    try {
+        const response = await fetch('/save-score', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ category, score }),
+        });
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Score saved:', result.status);
         } else {
-            endGame();
+            console.error('Failed to save score on the server.');
         }
+    } catch (error) {
+        console.error('Error saving score:', error);
     }
-    
-    // Shows the final score screen
-    function endGame() {
-        isGameActive = false; // The game is now over
-        showScreen('end');
-        finalScoreElement.innerText = score;
-        
-        let message = '';
-        const totalQuestions = currentQuestions.length;
-        const percentage = totalQuestions > 0 ? (score / (totalQuestions * 10)) * 100 : 0;
+}
 
-        if (percentage >= 80) message = "Excellent! You're a true Cyber Guardian!";
-        else if (percentage >= 50) message = "Good job! You have a solid foundation in this topic.";
-        else message = "You've learned something new! Keep practicing.";
-        
-        endMessageElement.innerText = message;
-    }
-
-    // Displays the current question and its answers
-    function showQuestion(question) {
-        questionText.innerText = question.question;
-        answerButtons.innerHTML = '';
-        question.answers.forEach(answer => {
-            const button = document.createElement('button');
-            button.innerText = answer.text;
-            button.classList.add('btn');
-            button.dataset.correct = answer.correct ? "true" : "false";
-            button.addEventListener('click', selectAnswer);
-            answerButtons.appendChild(button);
-        });
-    }
-
-    // Clears the board for the next question
-    function resetState() {
-        nextButton.classList.add('hidden');
-        feedbackText.innerText = '';
-        feedbackText.className = '';
-        while (answerButtons.firstChild) {
-            answerButtons.removeChild(answerButtons.firstChild);
-        }
-    }
-
-    // Handles what happens when an answer is clicked
-    function selectAnswer(e) {
-        const selectedButton = e.target;
-        const isCorrect = selectedButton.dataset.correct === "true";
-        
-        if (isCorrect) {
-            score += 10;
-            scoreElement.innerText = score;
-            feedbackText.innerText = currentQuestions[currentQuestionIndex].feedback;
-            feedbackText.classList.add('correct-feedback');
-        } else {
-            feedbackText.innerText = `Not quite. ${currentQuestions[currentQuestionIndex].feedback}`;
-            feedbackText.classList.add('wrong-feedback');
-        }
-        
-        // Disable all buttons and show which was right/wrong
-        Array.from(answerButtons.children).forEach(button => {
-            button.disabled = true;
-            if (button.dataset.correct === "true") button.classList.add('correct');
-            else button.classList.add('wrong');
-        });
-        
-        nextButton.classList.remove('hidden');
-    }
-});
+function showCategoryHub() {
+    endScreen.classList.add('hidden');
+    gameContainer.classList.add('hidden');
+    categoryHub.classList.remove('hidden');
+}

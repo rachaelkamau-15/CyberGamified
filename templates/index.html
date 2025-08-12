@@ -1,4 +1,3 @@
-<!-- File: templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,18 +10,18 @@
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
-                <a href="/index.html">CYBER<br>GAMIFIED</a>
+                <a href="{{ url_for('index') }}">CYBER<br>GAMIFIED</a>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="/for_whom.html">For Whom?</a></li>
-                    <li><a href="/about.html">About Us</a></li>
-                    <li><a href="/contact.html">Contact Us</a></li>
+                    <li><a href="{{ url_for('for_whom') }}">For Whom?</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
                 </ul>
             </nav>
             <div class="nav-buttons">
-                <a href="/login.html" class="login-btn">Log In</a>
-                <a href="/signup.html" class="signup-btn">Sign Up</a>
+                <a href="{{ url_for('login') }}" class="login-btn">Log In</a>
+                <a href="{{ url_for('signup') }}" class="signup-btn">Sign Up</a>
             </div>
         </div>
     </header>
@@ -33,65 +32,48 @@
                 <h1>Cybersecurity Awareness Games</h1>
                 <p>Select a category to test your knowledge. 
                     <br>The games are designed to challenge and educate you on crucial cybersecurity concepts.</p>
+                <!-- Added a clear call to action -->
+                <p class="login-prompt">Please log in or create an account to play.</p>
             </div>
             <div class="category-grid">
-                <!-- Cards will be populated here -->
+                <!-- =================== BUTTONS ARE NOW DISABLED LINKS =================== -->
                 <div class="category-card">
                     <div class="card-content"><h2>Social Engineering</h2><p>The art of human manipulation.</p></div>
-                    <button class="start-category-button" data-category="social-engineering">Start Game</button>
+                    <a href="{{ url_for('login') }}" class="start-category-button-disabled">Start Game</a>
                 </div>
                 <div class="category-card">
                     <div class="card-content"><h2>Phishing</h2><p>Identifying fraudulent emails.</p></div>
-                    <button class="start-category-button" data-category="phishing">Start Game</button>
+                    <a href="{{ url_for('login') }}" class="start-category-button-disabled">Start Game</a>
                 </div>
                 <div class="category-card">
                     <div class="card-content"><h2>Vishing</h2><p>Voice-based phishing scams.</p></div>
-                    <button class="start-category-button" data-category="vishing">Start Game</button>
+                    <a href="{{ url_for('login') }}" class="start-category-button-disabled">Start Game</a>
                 </div>
                 <div class="category-card">
                     <div class="card-content"><h2>Smishing</h2><p>Text message-based scams.</p></div>
-                    <button class="start-category-button" data-category="smishing">Start Game</button>
+                    <a href="{{ url_for('login') }}" class="start-category-button-disabled">Start Game</a>
                 </div>
                 <div class="category-card">
                     <div class="card-content"><h2>Password Hygiene</h2><p>Best practices for passwords.</p></div>
-                    <button class="start-category-button" data-category="password-hygiene">Start Game</button>
+                    <a href="{{ url_for('login') }}" class="start-category-button-disabled">Start Game</a>
                 </div>
                 <div class="category-card">
                     <div class="card-content"><h2>Strong Passwords</h2><p>Creating unbreakable codes.</p></div>
-                    <button class="start-category-button" data-category="strong-password">Start Game</button>
+                    <a href="{{ url_for('login') }}" class="start-category-button-disabled">Start Game</a>
                 </div>
                 <div class="category-card">
                     <div class="card-content"><h2>Ransomware</h2><p>Protecting your digital files.</p></div>
-                    <button class="start-category-button" data-category="ransomware">Start Game</button>
+                    <a href="{{ url_for('login') }}" class="start-category-button-disabled">Start Game</a>
                 </div>
                 <div class="category-card">
                     <div class="card-content"><h2>Spyware</h2><p>Keeping your activity private.</p></div>
-                    <button class="start-category-button" data-category="spyware">Start Game</button>
+                    <a href="{{ url_for('login') }}" class="start-category-button-disabled">Start Game</a>
                 </div>
-            </div>
-        </div>
-
-        <div class="container hidden" id="game-container">
-            <button id="back-button">&larr; Categories</button>
-            <div id="game-screen">
-                <div id="header">
-                    <div class="score-container"><span>Score: </span><span id="score">0</span></div>
-                    <div id="question-counter"></div>
-                </div>
-                <div id="question-container"><h2 id="question-text"></h2></div>
-                <div id="answer-buttons" class="btn-grid"></div>
-                <div id="feedback-container"><p id="feedback-text"></p></div>
-                <div class="controls"><button id="next-button" class="hidden">Next Question</button></div>
-            </div>
-            <div id="end-screen" class="hidden">
-                <h2>Category Complete!</h2>
-                <p>Your Final Score: <span id="final-score"></span></p>
-                <p id="end-message"></p>
-                <button id="restart-button">Play Again</button>
+                <!-- ==================================================================== -->
             </div>
         </div>
     </main>
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+    <!-- The game script is REMOVED from this page. It doesn't belong here. -->
 </body>
 </html>

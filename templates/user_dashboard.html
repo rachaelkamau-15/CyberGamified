@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Cyber Gamified</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo"> <a href="{{ url_for('dashboard') }}">CYBER<br>GAMIFIED</a> </div>
+            <nav class="main-nav"> <ul> <li><a href="{{ url_for('for_whom') }}">For Whom?</a></li> <li><a href="{{ url_for('about') }}">About Us</a></li> <li><a href="{{ url_for('contact') }}">Contact Us</a></li> </ul> </nav>
+            <div class="nav-buttons">
+                <div class="profile-dropdown">
+                    <button class="profile-btn" id="profileBtn">
+                        <img src="{{ url_for('static', filename='images/user-avatar.jpg') }}" alt="Profile" class="profile-avatar">
+                        <span class="profile-name-header">{{ user_full_name }}</span>
+                    </button>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <div class="dropdown-section"> <span class="section-title">ACCOUNT</span> <a href="{{ url_for('my_dashboard') }}"><i class="fas fa-th-large"></i> My Dashboard</a> <a href="{{ url_for('update_profile') }}"><i class="fas fa-user"></i> Update Profile</a> </div>
+                        <div class="dropdown-section"> <span class="section-title">SETTING</span> <a href="{{ url_for('change_password') }}"><i class="fas fa-lock"></i> Change Password</a> <a href="{{ url_for('logout') }}" class="text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="category-hub">
+            <div class="page-intro"> <h1>Cybersecurity Awareness Games</h1> <p>Select a category to test your knowledge. <br>The games are designed to challenge and educate you on crucial cybersecurity concepts.</p> </div>
+            <div class="category-grid">
+                <div class="category-card"><div class="card-content"><h2>Social Engineering</h2><p>The art of human manipulation.</p></div><button class="start-category-button" data-category="social-engineering">Start Game</button></div>
+                <div class="category-card"><div class="card-content"><h2>Phishing</h2><p>Identifying fraudulent emails.</p></div><button class="start-category-button" data-category="phishing">Start Game</button></div>
+                <div class="category-card"><div class="card-content"><h2>Vishing</h2><p>Voice-based phishing scams.</p></div><button class="start-category-button" data-category="vishing">Start Game</button></div>
+                <div class="category-card"><div class="card-content"><h2>Smishing</h2><p>Text message-based scams.</p></div><button class="start-category-button" data-category="smishing">Start Game</button></div>
+                <div class="category-card"><div class="card-content"><h2>Password Hygiene</h2><p>Best practices for passwords.</p></div><button class="start-category-button" data-category="password-hygiene">Start Game</button></div>
+                <div class="category-card"><div class="card-content"><h2>Strong Passwords</h2><p>Creating unbreakable codes.</p></div><button class="start-category-button" data-category="strong-password">Start Game</button></div>
+                <div class="category-card"><div class="card-content"><h2>Ransomware</h2><p>Protecting your digital files.</p></div><button class="start-category-button" data-category="ransomware">Start Game</button></div>
+                <div class="category-card"><div class="card-content"><h2>Spyware</h2><p>Keeping your activity private.</p></div><button class="start-category-button" data-category="spyware">Start Game</button></div>
+            </div>
+        </div>
+
+        <div class="container hidden" id="game-container">
+            <button id="back-button">&larr; Categories</button>
+            <div id="game-screen">
+                <div id="header">
+                    <div class="score-container"><span>Score: </span><span id="score">0</span></div>
+                    <div id="question-counter"></div>
+                </div>
+                <div id="question-container"><h2 id="question-text"></h2></div>
+                <div id="answer-buttons" class="btn-grid"></div>
+                <div id="feedback-container"><p id="feedback-text"></p></div>
+                <div class="controls"><button id="next-button" class="hidden">Next Question</button></div>
+            </div>
+            
+            <div id="end-screen" class="hidden">
+                <h2>Category Complete!</h2>
+                <p>Your Final Score: <span id="final-score"></span></p>
+                <p id="end-message"></p>
+                <div class="end-screen-buttons">
+                    <button id="play-again-button" class="quiz-action-btn play-again">Play Again</button>
+                    <button id="back-to-categories-button" class="quiz-action-btn start-now">Back to Categories</button>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const profileBtn = document.getElementById('profileBtn');
+            const dropdownContent = document.getElementById('dropdownContent');
+            if (profileBtn) {
+                profileBtn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    dropdownContent.classList.toggle('show');
+                });
+            }
+            window.addEventListener('click', () => {
+                if (dropdownContent && dropdownContent.classList.contains('show')) {
+                    dropdownContent.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,4 +1,3 @@
-<!-- File: templates/login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,16 +11,56 @@
         <div class="auth-logo">
             <a href="/index.html">CYBER<br>GAMIFIED</a>
         </div>
-        <h1 class="auth-title">Welcome Back!</h1>
+        <h3 class="auth-title">Welcome Back!</h3>
         <p class="auth-subtitle">Log in to continue your game.</p>
-        <form action="/login" method="post" class="auth-form">
+        
+        <!-- This will now display flash messages (like "Password reset successfully") -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% if error %}
+            <p class="auth-error">{{ error }}</p>
+        {% endif %}
+        
+        <form action="{{ url_for('login') }}" method="post" class="auth-form">
             <input type="email" name="email" class="auth-input" placeholder="Email Address" required>
-            <input type="password" name="password" class="auth-input" placeholder="Password" required>
+            
+            <div class="password-wrapper">
+                <input type="password" id="password" name="password" class="auth-input" placeholder="Password" required>
+                <span id="togglePassword" class="toggle-password">Show</span>
+            </div>
+            
+            <!-- =================== "FORGOT PASSWORD" LINK ADDED HERE =================== -->
+            <div class="form-extra-links">
+                <a href="{{ url_for('forgot_password') }}">Forgot password?</a>
+            </div>
+            <!-- ======================================================================= -->
+
             <button type="submit" class="auth-button">Log In</button>
         </form>
+        
         <div class="auth-footer">
-            <p>Don't have an account? <a href="/signup.html">Sign up</a></p>
+            <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a></p>
         </div>
     </div>
+
+    <!-- JavaScript for the password visibility toggle -->
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+
+        if (togglePassword && password) {
+            togglePassword.addEventListener('click', function () {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                this.textContent = this.textContent === 'Show' ? 'Hide' : 'Show';
+            });
+        }
+    </script>
 </body>
 </html>
