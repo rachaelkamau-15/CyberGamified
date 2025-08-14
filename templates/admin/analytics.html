@@ -1,0 +1,50 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Analytics Dashboard{% endblock %}
+
+{% block content %}
+<h2>Analytics Dashboard</h2>
+
+<div class="row mt-4">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">User Engagement</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">Active Users: {{ engagement.active_users }}</li>
+                    <li class="list-group-item">Total Attempts: {{ engagement.total_attempts }}</li>
+                    <li class="list-group-item">Average Score: {{ engagement.avg_score|default(0)|round(1) }}%</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Category Performance</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Attempts</th>
+                            <th>Avg Score</th>
+                            <th>Best Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                        <tr>
+                            <td>{{ category.category }}</td>
+                            <td>{{ category.attempts }}</td>
+                            <td>{{ category.avg_score|round(1) }}%</td>
+                            <td>{{ category.max_score }}%</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

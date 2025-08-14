@@ -1,0 +1,64 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<div class="row mt-4">
+    <div class="col-md-3 mb-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Users</h5>
+                <h1>{{ stats.total_users }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Questions</h5>
+                <h1>{{ stats.total_questions }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5 class="card-title">Active Users</h5>
+                <h1>{{ stats.active_users }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card bg-warning text-dark">
+            <div class="card-body">
+                <h5 class="card-title">Quiz Attempts</h5>
+                <h1>{{ stats.total_attempts }}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="mt-4">Recent Activity</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Category</th>
+            <th>Score</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for activity in recent_activity %}
+        <tr>
+            <td>{{ activity.email }}</td>
+            <td>{{ activity.category }}</td>
+            <td>{{ activity.high_score }}%</td>
+            <td>{{ activity.last_played_on }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

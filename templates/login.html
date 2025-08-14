@@ -5,62 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Cyber Gamified</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="auth-body">
     <div class="auth-container">
         <div class="auth-logo">
-            <a href="/index.html">CYBER<br>GAMIFIED</a>
+            <a href="{{ url_for('index') }}">CYBER<br>GAMIFIED</a>
         </div>
         <h3 class="auth-title">Welcome Back!</h3>
         <p class="auth-subtitle">Log in to continue your game.</p>
         
-        <!-- This will now display flash messages (like "Password reset successfully") -->
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="flash-message {{ category }}">{{ message }}</div>
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
 
         {% if error %}
-            <p class="auth-error">{{ error }}</p>
+            <div class="alert alert-danger">{{ error }}</div>
         {% endif %}
         
         <form action="{{ url_for('login') }}" method="post" class="auth-form">
-            <input type="email" name="email" class="auth-input" placeholder="Email Address" required>
-            
-            <div class="password-wrapper">
-                <input type="password" id="password" name="password" class="auth-input" placeholder="Password" required>
-                <span id="togglePassword" class="toggle-password">Show</span>
+            <div class="mb-3">
+                <input type="email" name="email" class="form-control" placeholder="Email Address" required>
             </div>
             
-            <!-- =================== "FORGOT PASSWORD" LINK ADDED HERE =================== -->
-            <div class="form-extra-links">
-                <a href="{{ url_for('forgot_password') }}">Forgot password?</a>
+            <div class="mb-3 input-group">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                <button class="btn btn-outline-secondary" type="button" id="togglePassword">Show</button>
             </div>
-            <!-- ======================================================================= -->
+            
+            <div class="mb-3 text-end">
+                <a href="{{ url_for('forgot_password') }}" class="text-decoration-none">Forgot password?</a>
+            </div>
 
-            <button type="submit" class="auth-button">Log In</button>
+            <button type="submit" class="btn btn-primary w-100">Log In</button>
         </form>
         
-        <div class="auth-footer">
+        <div class="auth-footer mt-3">
             <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign up</a></p>
         </div>
     </div>
 
-    <!-- JavaScript for the password visibility toggle -->
     <script>
         const togglePassword = document.querySelector('#togglePassword');
         const password = document.querySelector('#password');
 
-        if (togglePassword && password) {
-            togglePassword.addEventListener('click', function () {
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-                this.textContent = this.textContent === 'Show' ? 'Hide' : 'Show';
-            });
-        }
+        togglePassword.addEventListener('click', function () {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.textContent = this.textContent === 'Show' ? 'Hide' : 'Show';
+        });
     </script>
 </body>
 </html>
